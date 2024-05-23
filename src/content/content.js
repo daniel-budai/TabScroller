@@ -1,9 +1,9 @@
+function switchTab(direction) {
+  chrome.runtime.sendMessage({ action: "switchTab", direction });
+}
+
 window.addEventListener("wheel", (event) => {
   if (event.shiftKey) {
-    if (event.deltaY < 0) {
-      chrome.runtime.sendMessage({ action: "switchTab", direction: "left" });
-    } else {
-      chrome.runtime.sendMessage({ action: "switchTab", direction: "right" });
-    }
+    switchTab(event.deltaY < 0 ? "left" : "right");
   }
 });
